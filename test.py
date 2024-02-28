@@ -6,6 +6,7 @@ import pyarrow as pa
 import io
 
 
+
 tenant_id = "e24ac094-efd8-4a6b-98d5-a129b32a8c9a"
 client_id = "ed478ce2-c14e-4eeb-b865-3c73a3cb786b"
 client_secret = "SfD8Q~CJ1JJROP7wmeBLlfJyecdOqdBPcmjdUbmx"
