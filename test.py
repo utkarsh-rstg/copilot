@@ -106,9 +106,9 @@ file_system_client = service_client.get_file_system_client(file_system=file_syst
 #upload_multiple_files(service_client, file_system_name=file_system_name, directory_name="utkarshCopilot", local_directory_path="C:/Users/admin/Desktop/utkarsh_test_files/")
 list_all_in_file_system(service_client, file_system_name=file_system_name)
 #remote_file_names = ["currency.csv", "size.csv"]  # replace with your actual file names
-remote_file_names = ["data2.csv"]  # replace with your actual file names
-#download_multiple_files(service_client, file_system_name=file_system_name, directory_name="/", remote_file_names=remote_file_names, local_directory_path="C:/Users/admin/Desktop/utkarsh_test_files/download/")
+remote_file_names = ["2012_to_2007_NAICS.xls"]  # replace with your actual file names
+download_multiple_files(service_client, file_system_name=file_system_name, directory_name="/", remote_file_names=remote_file_names, local_directory_path="C:/Users/admin/Desktop/utkarsh_test_files/download/")
 #csv_data = read_csv_from_adls(service_client, file_system_name=file_system_name, directory_name="/", file_name="data1.csv")
 #write_parquet_to_adls(service_client, file_system_name=file_system_name, directory_name="utkarshCopilot", file_name="data1.parquet", data=csv_data)
 
-read_csv_uploadparquet_to_adls(service_client, file_system_name=file_system_name,source_directory_name="/",target_directory_name="utkarshCopilot", remote_file_names=remote_file_names)
+#read_csv_uploadparquet_to_adls(service_client, file_system_name=file_system_name,source_directory_name="/",target_directory_name="utkarshCopilot", remote_file_names=remote_file_names)
