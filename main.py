@@ -43,8 +43,8 @@ def get_joined_data():
     column_names = df_joined.columns.tolist()
     print(column_names)
       # Generate a report
-    report = df_joined.describe(include='all').to_dict()
 
+    report = df_joined.describe(include='all').to_dict()
   # Convert the report to a JSON string using the custom encoder
     json_str = json.dumps(report, cls=CustomJSONEncoder)
     print(json_str)
@@ -57,5 +57,18 @@ def get_joined_data():
         # Convert the JSON string to an HTML document
     html_str = json2html.convert(json = json_str)
     return HTMLResponse(content=html_str)
+
+
+@app.get("/data_new")
+def get_joined_data():
+    
+    df_joined = join_excel_and_sql_data('2012_NAICS_Index_File.xls', 'crosssell_utk')
+    # Convert column names to a list and print
+    column_names = df_joined.columns.tolist()
+    print(column_names)
+      # Generate a report
+    return df_joined.to_json()
+
+
 
 

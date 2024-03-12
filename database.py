@@ -137,7 +137,7 @@ def read_sql_data_as_df(table_name:str):
     conn = pyodbc.connect(conn_str)
 
     # Query the 'crosssell_utk' table
-    query = f"SELECT * FROM {table_name}"
+    query = f"SELECT  top 10 * FROM {table_name}"
     print(query)
     data_sql = pd.read_sql(query, conn)
     # Print the DataFrame to check if any data is fetched
