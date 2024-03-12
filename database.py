@@ -167,4 +167,4 @@ def truncate_table(table_name):
 #list_all_tables()
 list_all_columns_of_table('crosssell_utk')
 #read_csv_and_load()
-list_records_of_table('crosssell_utk')
+#list_records_of_table('crosssell_utk')
