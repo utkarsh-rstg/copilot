@@ -101,8 +101,8 @@ def read_csv_and_load():
         # Generate a default batch ID using the current timestamp
         data['BatchID'] = 1
         print(data.columns)
-        data = data.drop('Country', axis=1)
-        top_1000 = data.head(1000)
+        top_1000 = data.head(5)
+        print(top_1000)
         # Establish a connection to your SQL Server
         conn = pyodbc.connect(conn_str)
 
@@ -110,8 +110,12 @@ def read_csv_and_load():
 
         # Prepare the insert statement
         insert_stmt = """
-        INSERT INTO crosssell_utk (id, Gender, Age, Driving_License, Region_Code, Previously_Insured, Vehicle_Age, Vehicle_Damage, Annual_Premium, Policy_Sales_Channel, Vintage, Region, Area, NAICTitle, Response, Created_datetime, FileName, BatchID)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO crosssell_utk (id, Gender, Age, Driving_License, Region_Code, 
+        Previously_Insured, Vehicle_Age, 
+        Vehicle_Damage, Annual_Premium, Policy_Sales_Channel, 
+        Vintage,Country, Region, Area, NAICCode, 
+        Response, Created_datetime, FileName, BatchID)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)
         """
 
         # Perform the bulk insert
@@ -127,8 +131,39 @@ def read_csv_and_load():
         print(f"An error occurred: {str(ex)}, SQLSTATE: {sqlstate}")
     except Exception as ex:
         print(f"An unexpected error occurred: {str(ex)}")
-    
 
+def read_sql_data_as_df(table_name:str):
+    # Create a new connection
+    conn = pyodbc.connect(conn_str)
+
+    # Query the 'crosssell_utk' table
+    query = f"SELECT * FROM {table_name}"
+    print(query)
+    data_sql = pd.read_sql(query, conn)
+    # Print the DataFrame to check if any data is fetched
+    #print(data_sql)
+    #data_sql.head(5)
+    # Close the connection
+    conn.close()
+    return data_sql
+
+def truncate_table(table_name):
+    # Create a new connection
+    conn = pyodbc.connect(conn_str)
+    # Create a new cursor
+    cursor = conn.cursor()
+
+    # Execute the TRUNCATE TABLE statement
+    cursor.execute(f"TRUNCATE TABLE {table_name}")
+
+    # Commit the transaction
+    conn.commit()
+
+    # Close the connection
+    conn.close()
+
+# Call the function
+#truncate_table('crosssell_utk')
 #list_all_tables()
 list_all_columns_of_table('crosssell_utk')
 #read_csv_and_load()
